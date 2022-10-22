@@ -1,0 +1,5 @@
+grpcio
+grpcio-tools
+piccolo[sqlite]
+uvicorn
+fastapi
