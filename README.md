@@ -1,6 +1,6 @@
 ## How to use:
 
-Clone the repository in a fresh virtualenv and make ``test.db`` in root directory. 
+Clone the repository in a fresh virtualenv and make ``todo.sqlite`` in root directory. 
 
 Install dependencies
 ```
