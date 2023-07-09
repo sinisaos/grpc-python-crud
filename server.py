@@ -5,7 +5,14 @@ from grpc import aio
 
 import proto.todo_pb2
 import proto.todo_pb2_grpc
-from piccolo_sqlite import Todo
+from piccolo.columns import Boolean, Varchar
+from piccolo.table import Table, create_db_tables
+from piccolo_conf import DB
+
+
+class Todo(Table, db=DB):
+    name = Varchar()
+    completed = Boolean(default=False)
 
 
 class TodoService(proto.todo_pb2_grpc.TodoServiceServicer):
@@ -48,6 +55,11 @@ async def serve():
     )
     server.add_insecure_port(listen_addr)
     logging.info("Starting server on %s", listen_addr)
+    # Table creating
+    await create_db_tables(
+        Todo,
+        if_not_exists=True,
+    )
     await server.start()
     await server.wait_for_termination()
 
